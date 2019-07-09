@@ -1,4 +1,5 @@
 import { call, select, put, all, takeLatest } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import api from '../../../services/api';
 import { addToCartSuccess, updateAmount } from './actions';
 import { formatPrice } from '../../../util/format';
@@ -13,7 +14,7 @@ function* addToCart({ id }) {
   const currentAmount = productExists ? productExists.amount : 0;
   const amount = currentAmount + 1;
   if (amount > stockAmount) {
-    console.tron.warn('erro');
+    toast.error('Sem estoque');
     return;
   }
   if (productExists) {
